@@ -74,3 +74,23 @@ webserver:
   depends_on:
     - drupal
   restart: always
+
+
+certbot:
+  image: certbot/certbot:latest
+  volumes:
+    - letsencrypt:/etc/letsencrypt
+    - certbot:/var/www/certbot
+  depends_on:
+    - webserver
+  command: certonly --webroot --webroot-path=/var/www
+/certbot --email senel.huseyin@std.izu.edu.tr --agree-tos --no-eff-email --staging -d huseyinsenel.works
+
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
+  mariadb-data:
+  letsencrypt:
+  certbot:
